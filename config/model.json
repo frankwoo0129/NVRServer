@@ -1,0 +1,18 @@
+[
+	{
+		"model": "airVision",
+		"rtsp": "rtsp:\/\/%s:%s@%s:554\/live\/ch00_0"
+	}, {
+		"model": "Hikvision DS-2CD864-EI3",
+		"rtsp": "rtsp:\/\/%s:%s@%s:554\/\/Streaming\/Channels\/1"
+	}, {
+		"model": "TP-Link DCS-7410",
+		"rtsp": "rtsp:\/\/%s:%s@%s:554\/play1.sdp"
+	}, {
+		"model": "BlueEyes BE-1222M",
+		"rtsp": "rtsp:\/\/%s:%s@%s:554\/live2.sdp"
+	}, {
+		"model": "Ingrasys G3211E",
+		"rtsp": "rtsp:\/\/%s:%s@%s/stream1"
+	}
+]

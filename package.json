@@ -1,0 +1,29 @@
+{
+  "name": "NVRServer",
+  "version": "0.0.1",
+  "author": "Frank C.C. Su",
+  "description": "NVR Server",
+  "keywords": [
+    "node.js",
+    "javascript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://path/to/url"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "bugs": {
+    "url": "http://path/to/bug",
+    "email": "bug@example.com"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.10.6",
+    "moment": "^2.8.4"
+  }
+}
