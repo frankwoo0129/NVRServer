@@ -1,10 +1,9 @@
 {
-	"videopath": "/opt/NVR/video",
 	"jpegpath": "/opt/NVR/jpeg",
 	"percentage": 90,
 	"day":2,
-	"storagegroup" : [{
-		"videopath": "/",
+	"storage" : [{
+		"videopath": "/opt/NVR/video/",
 		"list": {
 			"10.120.135.11": {"address": "10.120.135.11"
 			}, "10.120.135.12": {"address": "10.120.135.12"

@@ -4,7 +4,7 @@
 		"rtsp": "rtsp:\/\/%s:%s@%s:554\/live\/ch00_0"
 	}, {
 		"model": "Hikvision DS-2CD864-EI3",
-		"rtsp": "rtsp:\/\/%s:%s@%s:554\/\/Streaming\/Channels\/1"
+		"rtsp": "rtsp:\/\/%s:%s@%s:554\/Streaming\/Channels\/1"
 	}, {
 		"model": "TP-Link DCS-7410",
 		"rtsp": "rtsp:\/\/%s:%s@%s:554\/play1.sdp"
