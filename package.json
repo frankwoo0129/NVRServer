@@ -23,10 +23,12 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "colors": "~1.0.3",
+    "eventproxy": "^0.3.2",
     "express": "~4.10.7",
-    "moment": "~2.8.4",
-    "underscore": "~1.7.0",
+    "loglevel": "^1.2.0",
     "mkdirp": "~0.5.0",
-    "colors": "~1.0.3"
+    "moment": "~2.8.4",
+    "underscore": "~1.7.0"
   }
 }
