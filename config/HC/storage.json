@@ -1,0 +1,12 @@
+{
+	"jpegpath": "/opt/NVR/jpeg",
+	"percentage": 90,
+	"day":2,
+	"storage" : [{
+		"videopath": "/opt/NVR/video/",
+		"list": {
+			"172.18.70.201": {"address": "172.18.70.201"},
+			"172.18.70.202": {"address": "172.18.70.202"}
+		}
+	}]
+}
