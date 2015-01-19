@@ -8,7 +8,7 @@ var express = require('express');
 var app = express();
 var route = require('./route')(app);
 
-contorller.load();
+controller.load();
 controller.start();
 var server = app.listen(3000);
 

@@ -5,8 +5,13 @@ var express = require('express');
 var cameras = require('../lib/controller').cameras;
 
 module.exports = function(app) {
-	app.get('/:address/video',function(req, res) {
-		res.end({msg: 'GOOD'});
+	
+	app.use(function(req, res, next) {
+		res.setHeader('Access-Control-Allow-Origin', 'http://172.18.2.168:8000');
+		res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+		res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+		res.setHeader('Access-Control-Allow-Credentials', true);
+		next();
 	});
 
 	app.get('/:address/play.html', function(req, res) {
@@ -16,10 +21,8 @@ module.exports = function(app) {
 		res.end();
 		return;
 	});
-	
-	
-	
-	app.get('/:address/play.m3u8', function(req, res, next) {
+
+	app.get('/:address/out.m3u8', function(req, res, next) {
 		/*
 		var filename = fs.realpathSync(cameras[req.params.address].videopath + '/play.m3u8');
 		fs.readFile(filename, function (err, contents) {
@@ -36,7 +39,6 @@ module.exports = function(app) {
 			}
 		});
 		*/
-		console.log(url.parse(req.url).pathname);
 		next();
 	});
 	
