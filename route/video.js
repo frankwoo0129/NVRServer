@@ -1,7 +1,9 @@
 var fs = require('fs');
 var path = require('path');
-var url = require('url');
 var express = require('express');
+var underscore = require('underscore');
+var option = require('../config/option');
+var storage = require('../config/'+option.site+'/storage');
 var cameras = require('../lib/controller').cameras;
 
 var root = express.Router();
@@ -17,10 +19,15 @@ root.use(function(req, res, next) {
 });
 
 root.get('/:address/:file', function(req, res, next) {
-	console.log(url.parse(req.url).pathname);
-	next();
+	if (cameras[req.params.address])
+		next();
+	else
+		next('error');
 });
-	
-root.use(express.static(path.join(__dirname, '../test/video/')));
+
+underscore.each(storage.storage, function(config, address) {
+	console.log(path.join(__dirname, '../', storage.videopath, config.path));
+	root.use(express.static(path.join(__dirname, '../', storage.videopath, config.path)));
+});
 
 module.exports = root;
