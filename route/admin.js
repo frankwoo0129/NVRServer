@@ -1,19 +1,9 @@
+var express = require('express');
 var cameras = require('../lib/controller').cameras;
+var root = express.Router();
 
-module.exports = function(app) {
-	app.del('/:address', function(req, res) {
-		
-	});
-	
-	app.post('/', function(req, res) {
-		
-	});
+root.use('/camera');
+root.use('/group');
+root.use('/user');
 
-	app.put('/:address', function(req, res) {
-		
-	});
-
-	app.get('/:address', function(req, res) {
-		
-	});
-};
+module.exports = root;

@@ -1,14 +1,26 @@
 var fs = require('fs');
-var moment = require('moment');
+var path = require('path');
+var url = require('url');
+var express = require('express');
 var cameras = require('../lib/controller').cameras;
 
-module.exports = function(app) {
-	app.get('/:address/jpeg', function(req, res) {
-		fs.realpath(cameras[req.params.address].jpegpath+'/'+moment().subtract(1, 'seconds').format('mmss')+'.jpg', function(err, path) {
-			if (err)
-				res.send(err);
-			else
-				res.sendFile(path);
-		});
-	});
-};
+var root = express.Router();
+
+root.use(function(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', 'http://'+req.socket.localAddress+':'+req.socket.localPort);
+	res.setHeader('Access-Control-Allow-Methods', 'GET');
+	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+	res.setHeader('Access-Control-Allow-Credentials', true);
+	//console.log('address: '+req.socket.localAddress);
+	//console.log('port   : '+req.socket.localPort);
+	next();
+});
+
+root.get('/:address/:file', function(req, res, next) {
+	console.log(url.parse(req.url).pathname);
+	next();
+});
+	
+root.use(express.static(path.join(__dirname, '../test/jpeg/')));
+
+module.exports = root;

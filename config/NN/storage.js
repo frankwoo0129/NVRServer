@@ -1,9 +1,11 @@
+module.exports =
 {
 	"jpegpath": "/opt/NVR/jpeg",
+	"videopath": "/opt/NVR/video",
 	"percentage": 90,
 	"day":2,
 	"storage" : [{
-		"videopath": "/opt/NVR/video/",
+		"path": "/",
 		"list": {
 			"10.120.135.11": {"address": "10.120.135.11"
 			}, "10.120.135.12": {"address": "10.120.135.12"
@@ -61,4 +63,4 @@
 			}
 		}
 	}]
-}
+};

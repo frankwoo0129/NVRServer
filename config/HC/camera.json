@@ -4,12 +4,14 @@
 		"model": "Ingrasys G3211E",
 		"title": "6F-1",
 		"address": "172.18.70.201",
-		"user": "Admin"
+		"user": "Admin",
+		"storage": "storage1"
 	}, {
 		"passwd": "Admin",
 		"model": "Ingrasys G3211E",
 		"title": "6F-2",
 		"address": "172.18.70.202",
-		"user": "Admin"
+		"user": "Admin",
+		"storage": "storage2"
 	}
 ]
