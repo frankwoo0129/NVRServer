@@ -1,14 +1,19 @@
 var fs = require('fs');
-var jpeg = require('./jpeg');
+var path = require('path');
+var express = require('express');
+var hbs = require('hbs');
+
+var monitor = require('./monitor');
 var video = require('./video');
 var lib = require('./lib');
 
 module.exports = function(app) {
-	app.use('/monitor', jpeg);
+	app.set('view engine', 'html');
+	app.engine('html', hbs.__express);
+
+	app.use('/monitor', monitor);
 	app.use('/video', video);
 	app.use('/lib', lib);
-	app.get('/', function(req, res) {
-		var filepath = fs.realpathSync('./test/example.html');
-		res.sendFile(filepath);
-	});
+
+	app.use(express.static(path.join(__dirname, '../dist')));
 };

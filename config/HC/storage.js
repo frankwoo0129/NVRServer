@@ -1,5 +1,6 @@
 module.exports = 
 {
+	"temp": "test/monitor",
 	"jpegpath": "test/jpeg",
 	"videopath": "test/video",
 	"percentage": 90,

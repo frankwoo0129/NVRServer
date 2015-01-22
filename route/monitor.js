@@ -17,7 +17,11 @@ root.use(function(req, res, next) {
 	next();
 });
 
-root.get('/:address/:file', function(req, res, next) {
+root.get('/:address', function(req, res) {
+	res.render('example', {address: req.params.address});
+});
+
+root.get('/:address/*', function(req, res, next) {
 	console.log(req.url);
 	if (cameras[req.params.address])
 		next();
@@ -25,6 +29,10 @@ root.get('/:address/:file', function(req, res, next) {
 		next('error');
 });
 	
-root.use(express.static(path.join(__dirname, '../', storage.jpegpath)));
+root.use(express.static(path.join(__dirname, '../', storage.temp)));
+
+root.all('*', function(req, res) {
+	res.sendStatus(404);
+});
 
 module.exports = root;
