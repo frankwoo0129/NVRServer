@@ -1,3 +1,7 @@
+/*jslint node: true */
+/*jslint nomen: true */
+"use strict";
+
 var fs = require('fs');
 var path = require('path');
 var express = require('express');
@@ -7,7 +11,7 @@ var monitor = require('./monitor');
 var video = require('./video');
 var lib = require('./lib');
 
-module.exports = function(app) {
+module.exports = function (app) {
 	app.set('view engine', 'html');
 	app.engine('html', hbs.__express);
 

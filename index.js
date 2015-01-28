@@ -1,3 +1,7 @@
+/*jslint node: true */
+/*jslint nomen: true */
+"use strict";
+
 var option = require('./config/option');
 var controller = require('./lib/controller');
 var express = require('express');
@@ -8,7 +12,7 @@ controller.load();
 controller.start();
 var server = app.listen(option.port);
 
-process.on('SIGINT', function() {
+process.on('SIGINT', function () {
 	console.log("\nGracefully shutting down from SIGINT (Ctrl-C)");
 	controller.stop();
 	server.close();
