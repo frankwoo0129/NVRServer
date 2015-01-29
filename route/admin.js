@@ -3,11 +3,11 @@
 "use strict";
 
 var express = require('express');
+var camera = require('./admin-camera');
+var group = require('./admin-group');
+var user = require('./admin-user');
 
 var root = express.Router();
-var camera = require('./camera');
-var group = require('./group');
-var user = require('./user');
 
 root.use('/camera', camera);
 root.use('/group', group);

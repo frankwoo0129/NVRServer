@@ -42,6 +42,8 @@ root.post('/:address/stop', function (req, res) {
 
 root.put('/:address', function (req, res) {});
 
-root.del('/:address', function (req, res) {});
+root.delete('/:address', function (req, res) {});
 
 root.get('/:address', function (req, res) {});
+
+module.exports = root;

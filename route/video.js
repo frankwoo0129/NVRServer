@@ -2,7 +2,6 @@
 /*jslint nomen: true */
 "use strict";
 
-var fs = require('fs');
 var path = require('path');
 var express = require('express');
 var log = require('loglevel');
@@ -13,31 +12,25 @@ var cameras = require('../lib/controller').cameras;
 
 var root = express.Router();
 
+root.get('/:address/*', function (req, res, next) {
+	if (cameras[req.params.address]) {
+		next();
+    } else {
+		res.status(404).json({msg: 'no ipcamera, address=' + req.params.address});
+    }
+});
+
 root.use(function (req, res, next) {
 	res.setHeader('Access-Control-Allow-Origin', 'http://' + req.socket.localAddress + ':' + req.socket.localPort);
 	res.setHeader('Access-Control-Allow-Methods', 'GET');
 	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 	res.setHeader('Access-Control-Allow-Credentials', true);
-	log.debug('address: ' + req.socket.localAddress);
-	log.debug('port   : ' + req.socket.localPort);
 	next();
-});
-
-root.get('/:address/*', function (req, res, next) {
-	if (cameras[req.params.address]) {
-		next();
-    } else {
-		next('error');
-    }
 });
 
 underscore.each(storage.storage, function (config, address) {
 	log.debug(path.join(__dirname, '../', storage.videopath, config.path));
 	root.use(express.static(path.join(__dirname, '../', storage.videopath, config.path)));
-});
-
-root.all('*', function (req, res) {
-	res.sendStatus(404);
 });
 
 module.exports = root;

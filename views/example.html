@@ -58,20 +58,33 @@
     <p>The video below is an <a href="https://developer.apple.com/library/ios/documentation/networkinginternet/conceptual/streamingmediaguide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008332-CH1-SW1">HTTP Live Stream</a>. On desktop browsers other than Safari, the HLS plugin will polyfill support for the format on top of the video.js Flash tech.</p>
     <p>Due to security restrictions in Flash, you will have to load this page over HTTP(S) to see the example in action.</p>
   </div>
-  <video id="video"
+  <video id="video1"
          class="video-js vjs-default-skin"
          height="720"
          width="1280"
 	 autoplay
          controls>
     <source
-       src="http://172.18.2.168:3000/monitor/{{address}}/out.m3u8"
+       src="http://172.18.2.168:3000/monitor/172.18.70.201/out.m3u8"
+       type="application/x-mpegURL">
+  </video>
+    <video id="video2"
+         class="video-js vjs-default-skin"
+         height="720"
+         width="1280"
+	 autoplay
+         controls>
+    <source
+       src="http://172.18.2.168:3000/monitor/172.18.70.202/out.m3u8"
        type="application/x-mpegURL">
   </video>
   <script>
     videojs.options.flash.swf = '/lib/videojs/video-js.swf';
     // initialize the player
-    var player = videojs('video', function() {
+    var player1 = videojs('video1', function() {
+        this.play();
+    });
+      var player2 = videojs('video2', function() {
         this.play();
     });
   </script>
