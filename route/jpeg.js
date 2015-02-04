@@ -1,7 +1,6 @@
 /*jslint node: true */
 /*jslint nomen: true */
 /*jslint es5: true */
-
 "use strict";
 
 var fs = require('fs');
@@ -13,11 +12,7 @@ var storage = require('../config/' + option.site + '/storage');
 
 var root = express.Router();
 
-root.get('/:address', function (req, res) {
-	res.render('example', {address: req.params.address});
-});
-
-root.get('/:address/*', function (req, res, next) {
+root.get('/:address', function (req, res, next) {
 	console.log('http://' + req.socket.localAddress + ':' + req.socket.localPort + req.url);
 	if (cameras[req.params.address]) {
 		next();
@@ -25,15 +20,7 @@ root.get('/:address/*', function (req, res, next) {
 		res.status(404).json({msg: 'no ipcamera, address=' + req.params.address});
     }
 });
-
-root.use(function (req, res, next) {
-	res.setHeader('Access-Control-Allow-Origin', 'http://' + req.socket.localAddress + ':' + 8000);
-	res.setHeader('Access-Control-Allow-Methods', 'GET');
-	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-	res.setHeader('Access-Control-Allow-Credentials', true);
-	next();
-});
 	
-root.use(express.static(path.join(__dirname, '../', storage.temp)));
+root.use(express.static(path.join(__dirname, '../', storage.jpegpath)));
 
 module.exports = root;
