@@ -1,0 +1,10 @@
+{
+	"temp": "/opt/NVR/monitor",
+	"jpegpath": "/opt/NVR/jpeg",
+	"videopath": "/opt/NVR/video",
+	"percentage": 90,
+	"day": 2,
+	"storage" : {
+		"storage1": {"path": "/"}
+	}
+}
