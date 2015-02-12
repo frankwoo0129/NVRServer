@@ -2,19 +2,34 @@
 /*jslint nomen: true */
 "use strict";
 
-var option = require('./config/option');
-var controller = require('./lib/controller');
-var express = require('express');
-var app = express();
-var route = require('./route')(app);
+var config = require('./config'),
+	controller = require('./lib/controller'),
+	express = require('express'),
+	hbs = require('hbs'),
+	server;
 
-controller.load();
-controller.start();
-var server = app.listen(option.port);
+var app = express();
+var	route = require('./route')(app);
+app.set('view engine', 'html');
+app.engine('html', hbs.__express);
+
+var startup = function () {
+	controller.load();
+	controller.start();
+	server = app.listen(config.option.port);
+};
+
+var shutdown = function () {
+	controller.stop();
+	if (server) {
+		server.close();
+	}
+	process.exit();
+};
 
 process.on('SIGINT', function () {
 	console.log("\nGracefully shutting down from SIGINT (Ctrl-C)");
-	controller.stop();
-	server.close();
-	process.exit();
+	shutdown();
 });
+
+startup();

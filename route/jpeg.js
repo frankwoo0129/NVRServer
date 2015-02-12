@@ -6,21 +6,18 @@
 var fs = require('fs');
 var path = require('path');
 var express = require('express');
+var moment = require('moment');
 var cameras = require('../lib/controller').cameras;
-var option = require('../config/option');
-var storage = require('../config/' + option.site + '/storage');
+var storage = require('../config/').storage;
 
 var root = express.Router();
 
-root.get('/:address', function (req, res, next) {
-	console.log('http://' + req.socket.localAddress + ':' + req.socket.localPort + req.url);
+root.get('/:address', function (req, res) {
 	if (cameras[req.params.address]) {
-		next();
+		res.sendFile(path.join(fs.realpathSync(storage.jpegpath), req.params.address, moment().subtract(3, 's').format('mmss') + '.jpg'), {root: '/'});
     } else {
 		res.status(404).json({msg: 'no ipcamera, address=' + req.params.address});
     }
 });
-	
-root.use(express.static(path.join(__dirname, '../', storage.jpegpath)));
 
 module.exports = root;

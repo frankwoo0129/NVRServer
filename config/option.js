@@ -1,10 +1,8 @@
-var option = {
-	site: 'HC',
-	loglevel: 'debug',
-	port: 3000
-};
+/*jslint node: true */
 
-var log = require('loglevel');
-log.setLevel(option.loglevel);
-
-module.exports = option;
+module.exports =
+	{
+		"site": "HC",
+		"loglevel": "debug",
+		"port": 3000
+	};

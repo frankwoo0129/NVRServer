@@ -1,24 +1,26 @@
 /*jslint node: true */
 /*jslint nomen: true */
 /*jslint es5: true */
-
 "use strict";
 
 var fs = require('fs');
 var path = require('path');
 var express = require('express');
 var cameras = require('../lib/controller').cameras;
-var option = require('../config/option');
-var storage = require('../config/' + option.site + '/storage');
+var storage = require('../config').storage;
 
 var root = express.Router();
 
 root.get('/:address', function (req, res) {
-	res.render('example', {address: req.params.address});
+	res.render('example', {
+		cameraAddress: req.params.address,
+		localAddress: req.socket.localAddress,
+		localPort: req.socket.localPort
+	});
 });
 
 root.get('/:address/*', function (req, res, next) {
-	console.log('http://' + req.socket.localAddress + ':' + req.socket.localPort + req.url);
+	console.log(req.url);
 	if (cameras[req.params.address]) {
 		next();
     } else {
@@ -26,14 +28,14 @@ root.get('/:address/*', function (req, res, next) {
     }
 });
 
-root.use(function (req, res, next) {
-	res.setHeader('Access-Control-Allow-Origin', 'http://' + req.socket.localAddress + ':' + 8000);
+root.get(function (req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', 'http://127.0.0.1:1234');
 	res.setHeader('Access-Control-Allow-Methods', 'GET');
 	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 	res.setHeader('Access-Control-Allow-Credentials', true);
 	next();
 });
 	
-root.use(express.static(path.join(__dirname, '../', storage.temp)));
+root.use(express.static(fs.realpathSync(storage.temp)));
 
 module.exports = root;

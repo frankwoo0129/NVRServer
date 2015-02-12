@@ -3,12 +3,12 @@
 /*jslint es5: true */
 "use strict";
 
+var fs = require('fs');
 var path = require('path');
 var express = require('express');
 var log = require('loglevel');
 var underscore = require('underscore');
-var option = require('../config/option');
-var storage = require('../config/' + option.site + '/storage');
+var storage = require('../config').storage;
 var cameras = require('../lib/controller').cameras;
 
 var root = express.Router();
@@ -22,7 +22,7 @@ root.get('/:address/*', function (req, res, next) {
 });
 
 root.use(function (req, res, next) {
-	res.setHeader('Access-Control-Allow-Origin', 'http://' + req.socket.localAddress + ':' + req.socket.localPort);
+	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Methods', 'GET');
 	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 	res.setHeader('Access-Control-Allow-Credentials', true);
@@ -30,8 +30,7 @@ root.use(function (req, res, next) {
 });
 
 underscore.each(storage.storage, function (config, address) {
-	log.debug(path.join(__dirname, '../', storage.videopath, config.path));
-	root.use(express.static(path.join(__dirname, '../', storage.videopath, config.path)));
+	root.use(express.static(fs.realpathSync(path.join(storage.videopath, config.path))));
 });
 
 module.exports = root;
