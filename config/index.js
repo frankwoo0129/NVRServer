@@ -28,14 +28,12 @@ if (!storage.jpegpath) {
 		}
 	});
 	
-	underscore.each(storage.storage, function (value, key) {
-		mkdirp(path.join(storage.videopath, value.path), function (err) {
-			if (err) {
-				throw new Error('mkdir videopath error');
-			} else {
-				log.debug('mkdir: ' + fs.realpathSync(path.join(storage.videopath, value.path)));
-			}
-		});
+	mkdirp(storage.videopath, function (err) {
+		if (err) {
+			throw new Error('mkdir videopath error');
+		} else {
+			log.debug('mkdir: ' + fs.realpathSync(storage.videopath));
+		}
 	});
 	
 	mkdirp(storage.temp, function (err) {
@@ -44,6 +42,16 @@ if (!storage.jpegpath) {
 		} else {
 			log.debug('mkdir: ' + fs.realpathSync(storage.temp));
 		}
+	});
+	
+	underscore.each(storage.storage, function (value, key) {
+		mkdirp(path.join(storage.videopath, value.path), function (err) {
+			if (err) {
+				throw new Error('mkdir videopath error');
+			} else {
+				log.debug('mkdir: ' + fs.realpathSync(path.join(storage.videopath, value.path)));
+			}
+		});
 	});
 }
 

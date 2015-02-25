@@ -4,7 +4,6 @@
 
 var express = require('express');
 var cameras = require('../lib/controller').cameras;
-
 var root = express.Router();
 
 root.get('/', function (req, res) {

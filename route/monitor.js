@@ -8,7 +8,6 @@ var path = require('path');
 var express = require('express');
 var cameras = require('../lib/controller').cameras;
 var storage = require('../config').storage;
-
 var root = express.Router();
 
 root.get('/:address', function (req, res) {

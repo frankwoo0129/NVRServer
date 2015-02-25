@@ -9,7 +9,6 @@ var express = require('express');
 var moment = require('moment');
 var cameras = require('../lib/controller').cameras;
 var storage = require('../config/').storage;
-
 var root = express.Router();
 
 root.get('/:address', function (req, res) {

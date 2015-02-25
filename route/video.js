@@ -10,7 +10,6 @@ var log = require('loglevel');
 var underscore = require('underscore');
 var storage = require('../config').storage;
 var cameras = require('../lib/controller').cameras;
-
 var root = express.Router();
 
 root.get('/:address/*', function (req, res, next) {

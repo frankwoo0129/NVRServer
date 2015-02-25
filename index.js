@@ -6,10 +6,11 @@ var config = require('./config'),
 	controller = require('./lib/controller'),
 	express = require('express'),
 	hbs = require('hbs'),
+	route = require('./route'),
+	app = express(),
 	server;
 
-var app = express();
-var	route = require('./route')(app);
+app.use(route);
 app.set('view engine', 'html');
 app.engine('html', hbs.__express);
 
@@ -19,17 +20,22 @@ var startup = function () {
 	server = app.listen(config.option.port);
 };
 
-var shutdown = function () {
-	controller.stop();
-	if (server) {
+var shutdown = function (callback) {
+	try {
+		controller.stop();
 		server.close();
+	} finally {
+		if (typeof callback === 'function') {
+			callback();
+		}
 	}
-	process.exit();
 };
 
 process.on('SIGINT', function () {
 	console.log("\nGracefully shutting down from SIGINT (Ctrl-C)");
-	shutdown();
+	shutdown(function () {
+		process.exit();
+	});
 });
 
 startup();
