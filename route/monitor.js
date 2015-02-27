@@ -1,30 +1,18 @@
 /*jslint node: true */
-/*jslint nomen: true */
-/*jslint es5: true */
 "use strict";
 
 var fs = require('fs');
 var path = require('path');
 var express = require('express');
 var cameras = require('../lib/controller').cameras;
-var storage = require('../config').storage;
 var root = express.Router();
 
-root.get('/:address', function (req, res) {
+root.get('/', function (req, res) {
 	res.render('example', {
-		cameraAddress: req.params.address,
+		cameraAddress: req.CameraAddress,
 		localAddress: req.socket.localAddress,
 		localPort: req.socket.localPort
 	});
-});
-
-root.get('/:address/*', function (req, res, next) {
-	console.log(req.url);
-	if (cameras[req.params.address]) {
-		next();
-    } else {
-		res.status(404).json({msg: 'no ipcamera, address=' + req.params.address});
-    }
 });
 
 root.use(function (req, res, next) {
@@ -35,6 +23,18 @@ root.use(function (req, res, next) {
 	next();
 });
 	
-root.use(express.static(fs.realpathSync(storage.temp)));
+root.get('/*', function (req, res, next) {
+	console.log(req.originalUrl);
+	var filepath = path.join(fs.realpathSync(cameras[req.CameraAddress].monitorpath), req.params[0]);
+	fs.stat(filepath, function (err, stat) {
+		if (err) {
+			res.sendStatus(404);
+		} else if (stat.size !== 0) {
+			res.sendFile(filepath);
+		} else {
+			res.sendStatus(404);
+		}
+	});
+});
 
 module.exports = root;

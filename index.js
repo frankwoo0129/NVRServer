@@ -2,11 +2,11 @@
 /*jslint nomen: true */
 "use strict";
 
-var config = require('./config'),
-	controller = require('./lib/controller'),
-	express = require('express'),
+var express = require('express'),
 	hbs = require('hbs'),
+	config = require('./config'),
 	route = require('./route'),
+	controller = require('./lib/controller'),
 	app = express(),
 	server;
 
@@ -25,7 +25,7 @@ var shutdown = function (callback) {
 		controller.stop();
 		server.close();
 	} finally {
-		if (typeof callback === 'function') {
+		if (callback && typeof callback === 'function') {
 			callback();
 		}
 	}
