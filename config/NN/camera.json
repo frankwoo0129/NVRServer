@@ -38,13 +38,6 @@
 		"storage": "storage1",
 		"passwd": "12345",
 		"model": "Hikvision DS-2CD864-EI3",
-		"title": "B04-2F-E4-038",
-		"address": "10.120.135.48",
-		"user": "admin"
-	}, {
-		"storage": "storage1",
-		"passwd": "12345",
-		"model": "Hikvision DS-2CD864-EI3",
 		"title": "B04-2F-G1-039",
 		"address": "10.120.135.49",
 		"user": "admin"
@@ -94,20 +87,6 @@
 		"storage": "storage1",
 		"passwd": "12345",
 		"model": "Hikvision DS-2CD864-EI3",
-		"title": "B04-2F-C10-046",
-		"address": "10.120.135.56",
-		"user": "admin"
-	}, {
-		"storage": "storage1",
-		"passwd": "12345",
-		"model": "Hikvision DS-2CD864-EI3",
-		"title": "B04-2F-D5-049",
-		"address": "10.120.135.59",
-		"user": "admin"
-	}, {
-		"storage": "storage1",
-		"passwd": "12345",
-		"model": "Hikvision DS-2CD864-EI3",
 		"title": "B04-2F-B14-051",
 		"address": "10.120.135.61",
 		"user": "admin"
@@ -124,13 +103,6 @@
 		"model": "Hikvision DS-2CD864-EI3",
 		"title": "B04-2F-D13-053",
 		"address": "10.120.135.63",
-		"user": "admin"
-	}, {
-		"storage": "storage1",
-		"passwd": "12345",
-		"model": "Hikvision DS-2CD864-EI3",
-		"title": "B04-2F-C11-052",
-		"address": "10.120.135.62",
 		"user": "admin"
 	}, {
 		"storage": "storage1",
@@ -313,13 +285,6 @@
 		"model": "Hikvision DS-2CD864-EI3",
 		"title": "B04-3F-B14-021",
 		"address": "10.120.135.31",
-		"user": "admin"
-	}, {
-		"storage": "storage1",
-		"passwd": "12345",
-		"model": "Hikvision DS-2CD864-EI3",
-		"title": "B04-3F-B6-001",
-		"address": "10.120.135.11",
 		"user": "admin"
 	}, {
 		"storage": "storage1",

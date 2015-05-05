@@ -1,5 +1,4 @@
 {
-	"temp": "/opt/NVR/monitor",
 	"jpegpath": "/opt/NVR/jpeg",
 	"videopath": "/opt/NVR/video",
 	"percentage": 90,

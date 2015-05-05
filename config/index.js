@@ -17,8 +17,6 @@ if (!storage.jpegpath) {
 	throw new Error('No jpegpath');
 } else if (!storage.videopath) {
 	throw new Error('No videopath');
-} else if (!storage.temp) {
-	throw new Error('No temp dir');
 } else {
 	mkdirp(storage.jpegpath, function (err) {
 		if (err) {
@@ -33,14 +31,6 @@ if (!storage.jpegpath) {
 			throw new Error('mkdir videopath error');
 		} else {
 			log.debug('mkdir: ' + fs.realpathSync(storage.videopath));
-		}
-	});
-	
-	mkdirp(storage.temp, function (err) {
-		if (err) {
-			throw new Error('mkdir temppath error');
-		} else {
-			log.debug('mkdir: ' + fs.realpathSync(storage.temp));
 		}
 	});
 	

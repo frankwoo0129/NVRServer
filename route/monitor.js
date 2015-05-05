@@ -8,15 +8,18 @@ var cameras = require('../lib/controller').cameras;
 var root = express.Router();
 
 root.get('/', function (req, res) {
+	var localAddress = req.socket.localAddress.split(':');
 	res.render('example', {
 		cameraAddress: req.CameraAddress,
-		localAddress: req.socket.localAddress,
+		localAddress: localAddress[localAddress.length - 1],
 		localPort: req.socket.localPort
 	});
 });
 
 root.use(function (req, res, next) {
-	res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+	if (req.headers.origin) {
+		res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+	}
 	res.setHeader('Access-Control-Allow-Methods', 'GET');
 	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 	res.setHeader('Access-Control-Allow-Credentials', true);

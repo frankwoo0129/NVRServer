@@ -2,7 +2,7 @@
 
 module.exports =
 	{
-		"site": "HC",
+		"site": "NN",
 		"loglevel": "debug",
 		"port": 3000
 	};
