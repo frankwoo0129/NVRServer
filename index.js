@@ -34,7 +34,6 @@ var shutdown = function (callback) {
 process.on('SIGINT', function () {
 	console.log("\nGracefully shutting down from SIGINT (Ctrl-C)");
 	shutdown(function () {
-		process.exit();
 	});
 });
 

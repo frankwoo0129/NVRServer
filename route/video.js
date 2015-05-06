@@ -5,7 +5,6 @@ var fs = require('fs');
 var path = require('path');
 var express = require('express');
 var log = require('loglevel');
-var underscore = require('underscore');
 var cameras = require('../lib/controller').cameras;
 var root = express.Router();
 
