@@ -4,29 +4,35 @@
 	<head>
 		<meta charset="utf-8">
 		<title>video.js HLS Plugin Example</title>
-		<link href="/lib/videojs/video-js.css" rel="stylesheet">
+		<link href="/lib/videojs/video-js.min.css" rel="stylesheet">
 		
 		<!-- video.js -->
-		<script src="/lib/videojs/video.js"></script>
+<!--		<script src="/lib/videojs/video.min.js"></script>-->
 		
 		<!-- Media Sources plugin -->
-		<script src="/lib/videojs-contrib-media-sources/videojs-media-sources.js"></script>
+<!--		<script src="/lib/videojs-contrib-media-sources/videojs-media-sources.js"></script>-->
 
 		<!-- HLS plugin -->
+<!--
 		<script src="/lib/videojs-contrib-hls/videojs-hls.js"></script>
-
-		<!-- segment handling -->
 		<script src="/lib/videojs-contrib-hls/xhr.js"></script>
+		<script src="/lib/videojs-contrib-hls/stream.js"></script>
 		<script src="/lib/videojs-contrib-hls/flv-tag.js"></script>
 		<script src="/lib/videojs-contrib-hls/exp-golomb.js"></script>
+		<script src="/lib/videojs-contrib-hls/h264-extradata.js"></script>
 		<script src="/lib/videojs-contrib-hls/h264-stream.js"></script>
 		<script src="/lib/videojs-contrib-hls/aac-stream.js"></script>
+		<script src="/lib/videojs-contrib-hls/metadata-stream.js"></script>
 		<script src="/lib/videojs-contrib-hls/segment-parser.js"></script>
+-->
 
 		<!-- m3u8 handling -->
-		<script src="/lib/videojs-contrib-hls/stream.js"></script>
-		<script src="/lib/videojs-contrib-hls//m3u8/m3u8-parser.js"></script>
-		<script src="/lib/videojs-contrib-hls//playlist-loader.js"></script>
+<!--
+		<script src="/lib/videojs-contrib-hls/m3u8/m3u8-parser.js"></script>
+		<script src="/lib/videojs-contrib-hls/playlist.js"></script>
+		<script src="/lib/videojs-contrib-hls/playlist-loader.js"></script>
+-->
+
 		<!-- <script src="/lib/pkcs7/pkcs7.unpad.js"></script> -->
 		<!-- <script src="/lib/videojs-contrib-hls/decrypter.js"></script> -->
 		<!-- <script src="/lib/videojs-contrib-hls/bin-utils.js"></script> -->
@@ -35,9 +41,6 @@
 		<!-- <script src="test/tsSegment.js"></script> -->
 		<!-- bunnies -->
 		<!--<script src="test/tsSegment-bc.js"></script>-->
-		<script>
-			videojs.options.flash.swf = '/lib/videojs/video-js.swf';
-		</script>
 		
 		<style>
 			body {
@@ -66,15 +69,13 @@
 			   width="1280"
 			   autoplay
 			   controls>
-			<source	src="http://{{localAddress}}:{{localPort}}/{{cameraAddress}}/video/out.m3u8"
+			<source	src="http://{{localAddress}}:{{localPort}}/{{cameraAddress}}/video/now.m3u8"
 					type="application/x-mpegURL">
 		</video>
 		
+		<script data-main="../../js/main" src="/lib/requirejs/require.js"></script>
 		<script>
-			// initialize the player
-			var player1 = videojs("video1").ready(function () {
-				this.play();
-			});
+
 		</script>
 	</body>
 </html>

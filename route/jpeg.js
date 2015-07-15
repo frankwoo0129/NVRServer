@@ -8,17 +8,15 @@ var moment = require('moment');
 var cameras = require('../lib/controller').cameras;
 var root = express.Router();
 
-var getPicture = function (address, count, callback) {
-	var filepath = path.join(cameras[address].jpegpath, moment().subtract(3, 's').format('mmss') + '.jpg');
+var getPicture = function (req, callback) {
+	var filepath = path.join(cameras[req.CameraAddress].jpegpath, moment().subtract(3, 's').format('mmss') + '.jpg');
 	fs.stat(filepath, function (err, stat) {
 		if (err) {
-			callback(count + 1);
+			callback(err);
 		} else if (moment().diff(moment(stat.mtime), 'minutes') > 1) {
-			callback(count + 1);
+			callback();
 		} else if (stat.size === 0) {
-			callback(count + 1);
-		} else if (count > 10) {
-			callback(-1);
+			callback();
 		} else {
 			callback(null, filepath);
 		}
@@ -26,17 +24,22 @@ var getPicture = function (address, count, callback) {
 };
 
 root.get('/', function (req, res) {
-	var callback = function (count, filepath) {
-		if (!count) {
-			res.sendFile(fs.realpathSync(filepath), {root: '/'});
-		} else if (count >= 0) {
-			getPicture(req.CameraAddress, count, callback);
-		} else {
+	var callback = function (err, filepath) {
+		if (err) {
 			res.sendStatus(404);
+		} else if (filepath) {
+			res.sendFile(fs.realpathSync(filepath), {root: '/'});
+		} else if (req.count > 10) {
+			res.sendStatus(404);
+		} else {
+			console.log(req.count);
+			req.count = req.count + 1;
+			getPicture(req, callback);
 		}
 	};
 	
-	getPicture(req.CameraAddress, 0, callback);
+	req.count = 0;
+	getPicture(req, callback);
 });
 
 

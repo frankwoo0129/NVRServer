@@ -1,8 +1,10 @@
 /*jslint node: true */
 /*jslint nomen: true */
+/*jslint es5: true */
 "use strict";
 
-var express = require('express'),
+var path = require('path'),
+	express = require('express'),
 	hbs = require('hbs'),
 	config = require('./config'),
 	route = require('./route'),
@@ -10,6 +12,7 @@ var express = require('express'),
 	app = express(),
 	server;
 
+app.use(express.static(path.join(__dirname, './dist')));
 app.use(route);
 app.set('view engine', 'html');
 app.engine('html', hbs.__express);
