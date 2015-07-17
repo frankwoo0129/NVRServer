@@ -41,7 +41,8 @@ require.config({
 		segmentParser: 'videojs-contrib-hls/segment-parser',
 		m3u8Parser: 'videojs-contrib-hls/m3u8/m3u8-parser',
 		playlist: 'videojs-contrib-hls/playlist',
-		playlistLoader: '/lib/videojs-contrib-hls/playlist-loader'
+		playlistLoader: 'videojs-contrib-hls/playlist-loader',
+		flowplayer: 'flowplayer-6.0.2/flowplayer'
 	},
 	shim: {
 		mediaSources: {
@@ -85,16 +86,67 @@ require.config({
 		},
 		playlistLoader: {
 			deps: ['playlist', 'xhr', 'm3u8Parser']
+		},
+		binUtils: {
+			deps: ['hls']
+		},
+		decrypter: {
+			deps: ['hls']
+		},
+		flowplayer: {
+			deps: ['jquery']
 		}
 	}
 });
 
-require(['jquery', 'videojs', 'mediaSources', 'hls', 'xhr', 'stream', 'flvTag', 'expGolomb', 'h264Extradata', 'h264Stream', 'aacStream', 'metadataStream', 'segmentParser', 'm3u8Parser', 'playlist', 'playlistLoader'], function ($, videojs) {
-	videojs.options.flash.swf = '/lib/videojs/video-js.swf';
-	// initialize the player
-	console.log('beforeReady');
-	var player1 = videojs("video1").ready(function () {
-		console.log('play');
-		this.play();
+require([
+	'jquery',
+	'videojs',
+	'flowplayer',
+	'mediaSources',
+	'hls',
+	'xhr',
+	'stream',
+	'flvTag',
+	'expGolomb',
+	'h264Extradata',
+	'h264Stream',
+	'aacStream',
+	'metadataStream',
+	'segmentParser',
+	'm3u8Parser',
+	'playlist',
+	'playlistLoader'
+], function ($, videojs, flowplayer) {
+//	videojs.options.flash.swf = '/lib/videojs/video-js.swf';
+//	var player1 = videojs("video1").ready(function () {
+//		this.play();
+//	});
+
+//	var api = flowplayer('#player', {
+//		clip: {
+//			sources: [
+//				{
+//					type: "application/x-mepgurl",
+//					src:  "//172.18.2.168:3000/172.18.70.202/video/now.m3u8"
+//				}
+//			]
+//		}
+//	});
+
+	flowplayer(function (api, root) {
+		// announce missing stream
+		api.on("error", function (e, api, err) {
+			if (err.code === 4 || err.code === 9) {
+				$(".fp-message p", root).text("We are sorry, currently no live stream available.");
+			}
+		});
 	});
+
+	flowplayer(function (api) {
+		api.on("load", function (e, api, video) {
+			$("#vinfo").text(api.engine.engineName + " engine playing " + video.type);
+		});
+	});
+	return;
 });

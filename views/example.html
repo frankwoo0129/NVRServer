@@ -4,8 +4,28 @@
 	<head>
 		<meta charset="utf-8">
 		<title>video.js HLS Plugin Example</title>
-		<link href="/lib/videojs/video-js.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/lib/videojs/video-js.min.css" >
+		<link rel="stylesheet" type="text/css" href="/lib/flowplayer-6.0.2/skin/minimalist.css">
 		
+		<style>
+#content {
+  max-width: 720px; /* narrower for almost 4/3 aspect ratio */
+}
+.flowplayer {
+  background: #777;
+  margin-bottom: 20px;
+}
+
+.flowplayer.is-error .fp-message p {
+  font-size: 200%;
+  font-weight: bold;
+  color: #f00;
+}
+</style>
+
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/flowplayer-6.0.2/flowplayer.min.js"></script>
+
 		<!-- video.js -->
 <!--		<script src="/lib/videojs/video.min.js"></script>-->
 		
@@ -63,6 +83,7 @@
 			<p>Due to security restrictions in Flash, you will have to load this page over HTTP(S) to see the example in action.</p>
 		</div>
 
+<!--
 		<video id="video1"
 			   class="video-js vjs-default-skin"
 			   height="720"
@@ -72,10 +93,17 @@
 			<source	src="http://{{localAddress}}:{{localPort}}/{{cameraAddress}}/video/now.m3u8"
 					type="application/x-mpegURL">
 		</video>
+-->
+
+		<div data-live="true" data-ratio="0.5625" class="flowplayer fixed-controls">
+			<video data-title="Live stream">
+<!--				<source type="application/x-mpegurl" src="http://wms.shared.streamshow.it/telesanremo/telesanremo/playlist.m3u8">-->
+				<source type="application/x-mpegurl" src="http://172.18.2.168:3000/172.18.70.202/video/now.m3u8">
+			</video>
+		</div>
+
 		
 		<script data-main="../../js/main" src="/lib/requirejs/require.js"></script>
-		<script>
 
-		</script>
 	</body>
 </html>
