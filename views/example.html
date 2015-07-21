@@ -97,8 +97,7 @@
 
 		<div data-live="true" data-ratio="0.5625" class="flowplayer fixed-controls">
 			<video data-title="Live stream">
-<!--				<source type="application/x-mpegurl" src="http://wms.shared.streamshow.it/telesanremo/telesanremo/playlist.m3u8">-->
-				<source type="application/x-mpegurl" src="http://172.18.2.168:3000/172.18.70.202/video/now.m3u8">
+				<source type="application/x-mpegurl" src="http://{{localAddress}}:{{localPort}}/{{cameraAddress}}/video/now.m3u8">
 			</video>
 		</div>
 
