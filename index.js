@@ -6,7 +6,6 @@
 var path = require('path'),
 	express = require('express'),
 	hbs = require('hbs'),
-	config = require('./config'),
 	route = require('./route'),
 	controller = require('./lib/controller'),
 	app = express(),
@@ -20,22 +19,33 @@ app.engine('html', hbs.__express);
 var startup = function () {
 	controller.load();
 	controller.start();
-	server = app.listen(config.option.port);
+	server = app.listen(3000);
 };
 
 var shutdown = function (callback) {
 	try {
 		controller.stop();
 		server.close();
-	} finally {
+	} catch (err) {
 		if (callback && typeof callback === 'function') {
-			callback();
+			return callback(err);
+		} else {
+			throw err;
 		}
+	}
+
+	if (callback && typeof callback === 'function') {
+		callback();
 	}
 };
 
 process.on('SIGINT', function () {
 	console.log("\nGracefully shutting down from SIGINT (Ctrl-C)");
+	shutdown(function () {
+	});
+});
+
+process.on('exit', function () {
 	shutdown(function () {
 	});
 });

@@ -3,16 +3,14 @@
 
 var fs = require('fs');
 var path = require('path');
-var underscore = require('underscore');
 var mkdirp = require('mkdirp');
 var async = require('async');
 var log = require('loglevel');
-var option = require('./option');
 var model = require('./model');
-log.setLevel(option.loglevel);
+var site = 'HC';
 
-var storage = JSON.parse(fs.readFileSync('./config/' + option.site + '/storage.json', {encoding: 'utf-8'}));
-var config = JSON.parse(fs.readFileSync('./config/' + option.site + '/camera.json', {encoding: 'utf-8'}));
+var storage = JSON.parse(fs.readFileSync('./config/' + site + '/storage.json', {encoding: 'utf-8'}));
+var config = JSON.parse(fs.readFileSync('./config/' + site + '/camera.json', {encoding: 'utf-8'}));
 
 var mk = function (p, callback) {
 	mkdirp(p, function (err) {
@@ -24,6 +22,8 @@ var mk = function (p, callback) {
 		}
 	});
 };
+
+log.setLevel('debug');
 
 if (!storage.jpegpath) {
 	throw new Error('No jpegpath');
@@ -52,5 +52,4 @@ if (!storage.jpegpath) {
 
 module.exports.config = config;
 module.exports.storage = storage;
-module.exports.option = option;
 module.exports.model = model;
