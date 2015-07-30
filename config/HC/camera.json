@@ -6,5 +6,12 @@
 		"address": "172.18.70.202",
 		"user": "Admin",
 		"storage": "storage2"
+	}, {
+		"storage": "storage2",
+		"passwd": "12345",
+		"model": "Hikvision DS-2CD864-EI3",
+		"title": "6F-3",
+		"address": "172.18.2.239",
+		"user": "admin"
 	}
 ]

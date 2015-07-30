@@ -118,10 +118,10 @@ require([
 	'playlist',
 	'playlistLoader'
 ], function ($, videojs, flowplayer) {
-//	videojs.options.flash.swf = '/lib/videojs/video-js.swf';
-//	var player1 = videojs("video1").ready(function () {
-//		this.play();
-//	});
+	videojs.options.flash.swf = '/lib/videojs/video-js.swf';
+	var player1 = videojs("video1").ready(function () {
+		this.play();
+	});
 
 //	var api = flowplayer('#player', {
 //		clip: {
@@ -134,19 +134,19 @@ require([
 //		}
 //	});
 
-	flowplayer(function (api, root) {
-		// announce missing stream
-		api.on("error", function (e, api, err) {
-			if (err.code === 4 || err.code === 9) {
-				$(".fp-message p", root).text("We are sorry, currently no live stream available.");
-			}
-		});
-	});
-
-	flowplayer(function (api) {
-		api.on("load", function (e, api, video) {
-			$("#vinfo").text(api.engine.engineName + " engine playing " + video.type);
-		});
-	});
-	return;
+//	flowplayer(function (api, root) {
+//		// announce missing stream
+//		api.on("error", function (e, api, err) {
+//			if (err.code === 4 || err.code === 9) {
+//				$(".fp-message p", root).text("We are sorry, currently no live stream available.");
+//			}
+//		});
+//	});
+//
+//	flowplayer(function (api) {
+//		api.on("load", function (e, api, video) {
+//			$("#vinfo").text(api.engine.engineName + " engine playing " + video.type);
+//		});
+//	});
+//	return;
 });
