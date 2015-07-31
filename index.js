@@ -6,12 +6,14 @@
 var path = require('path'),
 	express = require('express'),
 	hbs = require('hbs'),
+	logger = require('morgan'),
 	config = require('./config'),
 	route = require('./route'),
 	controller = require('./lib/controller'),
 	app = express(),
 	server;
 
+app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, './dist')));
 app.use(route);
 app.set('view engine', 'html');
