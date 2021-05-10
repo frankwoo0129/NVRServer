@@ -22,11 +22,11 @@ root.use('/list', function (req, res) {
 });
 
 root.use('/:address', function (req, res, next) {
-	if (cameras[req.params.address]) {
-		req.CameraAddress = req.params.address;
-		next();
+    if (cameras[req.params.address]) {
+        req.CameraAddress = req.params.address;
+        next();
     } else {
-		res.status(404).json({msg: 'no ipcamera, address=' + req.params.address});
+        res.status(404).json({ msg: 'no ipcamera, address=' + req.params.address });
     }
 });
 

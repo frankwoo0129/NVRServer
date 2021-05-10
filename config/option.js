@@ -1,8 +1,8 @@
 /*jslint node: true */
 
 module.exports =
-	{
-		"site": "HC",
-		"loglevel": "debug",
-		"port": 3000
-	};
+{
+    "site": "HC",
+    "loglevel": "debug",
+    "port": 3000
+};

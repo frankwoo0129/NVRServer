@@ -1,108 +1,114 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8">
-		<title>video.js HLS Plugin Example</title>
-		<link rel="stylesheet" type="text/css" href="/lib/videojs/video-js.min.css" >
-		<link rel="stylesheet" type="text/css" href="/lib/flowplayer-6.0.2/skin/minimalist.css">
-		
-		<style>
-#content {
-  max-width: 720px; /* narrower for almost 4/3 aspect ratio */
-}
-.flowplayer {
-  background: #777;
-  margin-bottom: 20px;
-}
+<head>
+    <meta charset="utf-8">
+    <title>video.js HLS Plugin Example</title>
+    <link rel="stylesheet" type="text/css" href="/lib/videojs/video-js.min.css">
+    <link rel="stylesheet" type="text/css" href="/lib/flowplayer-6.0.2/skin/minimalist.css">
 
-.flowplayer.is-error .fp-message p {
-  font-size: 200%;
-  font-weight: bold;
-  color: #f00;
-}
-</style>
+    <style>
+        #content {
+            max-width: 720px;
+            /* narrower for almost 4/3 aspect ratio */
+        }
 
-<script src="/lib/jquery/jquery.min.js"></script>
-<script src="/lib/flowplayer-6.0.2/flowplayer.min.js"></script>
+        .flowplayer {
+            background: #777;
+            margin-bottom: 20px;
+        }
 
-		<!-- video.js -->
-<!--		<script src="/lib/videojs/video.min.js"></script>-->
-		
-		<!-- Media Sources plugin -->
-<!--		<script src="/lib/videojs-contrib-media-sources/videojs-media-sources.js"></script>-->
+        .flowplayer.is-error .fp-message p {
+            font-size: 200%;
+            font-weight: bold;
+            color: #f00;
+        }
+    </style>
 
-		<!-- HLS plugin -->
-<!--
-		<script src="/lib/videojs-contrib-hls/videojs-hls.js"></script>
-		<script src="/lib/videojs-contrib-hls/xhr.js"></script>
-		<script src="/lib/videojs-contrib-hls/stream.js"></script>
-		<script src="/lib/videojs-contrib-hls/flv-tag.js"></script>
-		<script src="/lib/videojs-contrib-hls/exp-golomb.js"></script>
-		<script src="/lib/videojs-contrib-hls/h264-extradata.js"></script>
-		<script src="/lib/videojs-contrib-hls/h264-stream.js"></script>
-		<script src="/lib/videojs-contrib-hls/aac-stream.js"></script>
-		<script src="/lib/videojs-contrib-hls/metadata-stream.js"></script>
-		<script src="/lib/videojs-contrib-hls/segment-parser.js"></script>
+    <script src="/lib/jquery/jquery.min.js"></script>
+    <script src="/lib/flowplayer-6.0.2/flowplayer.min.js"></script>
+
+    <!-- video.js -->
+    <!--
+    <script src="/lib/videojs/video.min.js"></script>
+    -->
+
+    <!-- Media Sources plugin -->
+    <!--
+    <script src="/lib/videojs-contrib-media-sources/videojs-media-sources.js"></script>
+    -->
+
+    <!-- HLS plugin -->
+    <!--
+    <script src="/lib/videojs-contrib-hls/videojs-hls.js"></script>
+    <script src="/lib/videojs-contrib-hls/xhr.js"></script>
+    <script src="/lib/videojs-contrib-hls/stream.js"></script>
+    <script src="/lib/videojs-contrib-hls/flv-tag.js"></script>
+    <script src="/lib/videojs-contrib-hls/exp-golomb.js"></script>
+    <script src="/lib/videojs-contrib-hls/h264-extradata.js"></script>
+    <script src="/lib/videojs-contrib-hls/h264-stream.js"></script>
+    <script src="/lib/videojs-contrib-hls/aac-stream.js"></script>
+    <script src="/lib/videojs-contrib-hls/metadata-stream.js"></script>
+    <script src="/lib/videojs-contrib-hls/segment-parser.js"></script>
+    -->
+
+    <!-- m3u8 handling -->
+    <!--
+    <script src="/lib/videojs-contrib-hls/m3u8/m3u8-parser.js"></script>
+    <script src="/lib/videojs-contrib-hls/playlist.js"></script>
+    <script src="/lib/videojs-contrib-hls/playlist-loader.js"></script>
+    -->
+
+    <!-- <script src="/lib/pkcs7/pkcs7.unpad.js"></script> -->
+    <!-- <script src="/lib/videojs-contrib-hls/decrypter.js"></script> -->
+    <!-- <script src="/lib/videojs-contrib-hls/bin-utils.js"></script> -->
+    <!-- example MPEG2-TS segments -->
+    <!-- bipbop -->
+    <!-- <script src="test/tsSegment.js"></script> -->
+    <!-- bunnies -->
+    <!--<script src="test/tsSegment-bc.js"></script>-->
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .info {
+            background-color: #eee;
+            border: thin solid #333;
+            border-radius: 3px;
+            padding: 0 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="info">
+        <p>The video below is an <a
+                href="https://developer.apple.com/library/ios/documentation/networkinginternet/conceptual/streamingmediaguide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008332-CH1-SW1">HTTP
+                Live Stream</a>. On desktop browsers other than Safari, the HLS plugin will polyfill support for the
+            format on top of the video.js Flash tech.</p>
+        <p>Due to security restrictions in Flash, you will have to load this page over HTTP(S) to see the example in
+            action.</p>
+    </div>
+
+    <video id="video1" class="video-js vjs-default-skin" height="720" width="1280" autoplay controls>
+        <source src="http://{{localAddress}}:{{localPort}}/{{cameraAddress}}/video/now.m3u8"
+            type="application/x-mpegURL">
+    </video>
+
+    <!--
+    <div data-live="true" data-ratio="0.5625" class="flowplayer fixed-controls">
+        <video data-title="Live stream">
+            <source type="application/x-mpegurl" src="http://{{localAddress}}:{{localPort}}/{{cameraAddress}}/video/now.m3u8">
+        </video>
+    </div>
 -->
 
-		<!-- m3u8 handling -->
-<!--
-		<script src="/lib/videojs-contrib-hls/m3u8/m3u8-parser.js"></script>
-		<script src="/lib/videojs-contrib-hls/playlist.js"></script>
-		<script src="/lib/videojs-contrib-hls/playlist-loader.js"></script>
--->
+    <script data-main="../../js/main" src="/lib/requirejs/require.js"></script>
 
-		<!-- <script src="/lib/pkcs7/pkcs7.unpad.js"></script> -->
-		<!-- <script src="/lib/videojs-contrib-hls/decrypter.js"></script> -->
-		<!-- <script src="/lib/videojs-contrib-hls/bin-utils.js"></script> -->
-		<!-- example MPEG2-TS segments -->
-		<!-- bipbop -->
-		<!-- <script src="test/tsSegment.js"></script> -->
-		<!-- bunnies -->
-		<!--<script src="test/tsSegment-bc.js"></script>-->
-		
-		<style>
-			body {
-				font-family: Arial, sans-serif;
-				margin: 20px;
-			}
-			.info {
-				background-color: #eee;
-				border: thin solid #333;
-				border-radius: 3px;
-				padding: 0 5px;
-				margin: 20px 0;
-			}
-		</style>
-	</head>
+</body>
 
-	<body>
-		<div class="info">
-			<p>The video below is an <a href="https://developer.apple.com/library/ios/documentation/networkinginternet/conceptual/streamingmediaguide/Introduction/Introduction.html#//apple_ref/doc/uid/TP40008332-CH1-SW1">HTTP Live Stream</a>. On desktop browsers other than Safari, the HLS plugin will polyfill support for the format on top of the video.js Flash tech.</p>
-			<p>Due to security restrictions in Flash, you will have to load this page over HTTP(S) to see the example in action.</p>
-		</div>
-
-		<video id="video1"
-			   class="video-js vjs-default-skin"
-			   height="720"
-			   width="1280"
-			   autoplay
-			   controls>
-			<source	src="http://{{localAddress}}:{{localPort}}/{{cameraAddress}}/video/now.m3u8"
-					type="application/x-mpegURL">
-		</video>
-
-<!--
-		<div data-live="true" data-ratio="0.5625" class="flowplayer fixed-controls">
-			<video data-title="Live stream">
-				<source type="application/x-mpegurl" src="http://{{localAddress}}:{{localPort}}/{{cameraAddress}}/video/now.m3u8">
-			</video>
-		</div>
--->
-
-		
-		<script data-main="../../js/main" src="/lib/requirejs/require.js"></script>
-
-	</body>
 </html>

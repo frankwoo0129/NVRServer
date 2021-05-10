@@ -14,5 +14,5 @@ root.use('/videojs-contrib-media-sources', express.Router().use(express.static(p
 root.use('/videojs-contrib-hls', express.Router().use(express.static(path.join(__dirname, '../bower_components/videojs-contrib-hls/src/'))));
 root.use('/pkcs7', express.Router().use(express.static(path.join(__dirname, '../bower_components/videojs-contrib-hls/node_modules/pkcs7/dist/'))));
 root.use('/requirejs', express.Router().use(express.static(path.join(__dirname, '../node_modules/requirejs/'))));
-	
+
 module.exports = root;
