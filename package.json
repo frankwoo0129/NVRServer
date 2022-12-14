@@ -21,7 +21,7 @@
   "dependencies": {
     "colors": "~1.0.3",
     "eventproxy": "^1.0.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "hbs": "^4.1.2",
     "loglevel": "~1.2.0",
     "moment": "^2.29.2",
